@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         showSlide(currentSlide);
     }
+
     // Мобильное меню (код мобильного меню не меняется)
     const burgerMenu = document.querySelector('.burger-menu');
     if (burgerMenu) {
@@ -134,21 +135,12 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('active');
         });
     }
-    // Получаем элементы формы, модального окна и кнопки закрытия
+
+    // Получаем элементы формы и кнопки
     const form = document.getElementById('telegramForm');
     if (form) {
-        const notificationModal = document.getElementById('notificationModal');
-        const closeButton = document.querySelector('.close-button');
-
-        // Функция для отображения модального окна
-        function showModal() {
-            notificationModal.style.display = 'block';
-        }
-
-        // Функция для скрытия модального окна
-        function hideModal() {
-            notificationModal.style.display = 'none';
-        }
+        const submitButton = form.querySelector('button[type="submit"]');
+        const formElements = form.querySelectorAll('input, textarea, .privacy');
 
         // Обработчик отправки формы
         form.addEventListener('submit', function(event) {
@@ -164,21 +156,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     console.log(data); // Вывод ответа от сервера
 
-                    // Показываем модальное окно
-                    showModal();
+                    // Скрываем элементы формы
+                    formElements.forEach(element => {
+                        element.style.display = 'none';
+                    });
 
-                    // Дополнительные действия после успешной отправки (например, очистка формы)
-                    form.reset();
+                    // Изменяем текст кнопки
+                    submitButton.textContent = "Спасибо! Мы свяжемся с вами в ближайшее время";
                 })
                 .catch(error => {
                     console.error('Ошибка:', error);
                     // Обработка ошибки (например, отображение сообщения об ошибке)
                 });
         });
-
-        // Обработчик нажатия на кнопку закрытия модального окна
-        if (closeButton) {
-            closeButton.addEventListener('click', hideModal);
-        }
     }
 });
