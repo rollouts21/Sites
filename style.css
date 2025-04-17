@@ -1,0 +1,692 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header */
+header.sticky-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    padding: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Бургер меню (скрыто по умолчанию) */
+.burger-menu {
+    display: none; /* Скрываем на больших экранах */
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Стили для навигационных ссылок */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: #f2f2f2;
+}
+
+.order-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.order-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Кнопка смены темы */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Slider */
+section.slider {
+    position: relative; /* Добавлено для позиционирования кнопок */
+    height: 100vh;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    align-items: center;
+    width: 100%; /* Занимает всю ширину экрана */
+}
+
+.slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 2rem;
+    height: 100vh; /* Занимает всю высоту экрана */
+    width: 100%; /* Занимает всю ширину экрана */
+}
+
+.slide h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.slide p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Стили для стрелочек слайдера */
+.slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 10;
+}
+
+.slider-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-control.prev {
+    left: 1rem;
+}
+
+.slider-control.next {
+    right: 1rem;
+}
+
+/* Projects */
+section.projects {
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+/* Стилизация кнопки "Смотреть все проекты" */
+.see-more {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    margin-top: 1rem; /* Добавлен отступ сверху */
+}
+
+.see-more:hover {
+    background-color: #0056b3;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.project:hover {
+    transform: translateY(-0.25rem);
+}
+
+.project-image {
+    height: 200px;
+    background-color: #ddd;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Contact Form */
+section.contact-form {
+    padding: 5rem 2rem;
+    background-color: #f0f0f0; /* Убираем background-image */
+}
+
+body.dark-theme section.contact-form {
+    background-color: #333; /* Цвет для темной темы */
+    color: #fff;
+}
+
+.form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .form-wrapper {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-wrapper input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+}
+
+.form-wrapper input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Стили для темной темы для полей формы */
+body.dark-theme .form-wrapper input {
+    background-color: #444; /* Темный фон */
+    color: #fff; /* Светлый текст */
+    border-color: #666; /* Темная граница */
+}
+
+body.dark-theme .form-wrapper input:focus {
+    border-color: #007bff;
+}
+
+.privacy {
+    margin-top: 1rem;
+    word-break: break-word; /* Добавлено для предотвращения вылезания текста */
+}
+
+/* Текст рядом с checkbox в одну строку */
+.privacy label {
+    white-space: normal; /* Разрешаем перенос текста */
+    font-size: 0.9rem; /* Уменьшаем шрифт */
+}
+
+.privacy input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.privacy a {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.form-wrapper button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.form-wrapper button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для страницы "О нас" */
+section.about-us {
+    padding: 5rem 2rem;
+    text-align: left; /* Выравниваем текст по левому краю */
+    max-width: 800px; /* Ограничиваем ширину контента */
+    margin: 0 auto; /* Центрируем контент */
+}
+
+section.about-us h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center; /* Выравниваем заголовок по центру */
+}
+
+section.about-us p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+section.about-us ul {
+    list-style: disc;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+section.about-us ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Стили для страницы "Контакты" */
+section.contact-info {
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section.contact-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: #007bff;
+    width: 2rem;
+}
+
+.contact-item p {
+    font-size: 1.1rem;
+}
+
+.contact-item img {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+.contact-item.photo {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+body.dark-theme footer {
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+body.dark-theme .footer-section ul li a {
+    color: #fff;
+}
+
+.footer-section ul li a:hover {
+    color: #007bff;
+}
+
+.footer-section.social .social-links a {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0 0.5rem;
+    transition: color 0.2s ease;
+}
+
+body.dark-theme .footer-section.social .social-links a {
+    color: #fff;
+}
+
+.footer-section.social .social-links a:hover {
+    color: #007bff;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 3rem;
+}
+
+/* Стилизация кнопки "Подписаться" */
+.newsletter button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.newsletter button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Стилизация формы подписки в футере */
+.newsletter form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; /* Изменено на row */
+    align-items: center;
+    gap: 1rem;
+}
+
+.newsletter input[type="email"] {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    flex: 1; /* Растягивает поле ввода на доступное пространство */
+}
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для темной темы для попапа */
+body.dark-theme .popup-content {
+    background-color: #333;
+    color: #fff;
+}
+
+.popup-content h2 {
+    margin-bottom: 1rem;
+}
+
+.close-popup {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #888;
+}
+
+body.dark-theme .close-popup {
+    color: #fff;
+}
+
+.popup-controls {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.understood {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.understood:hover {
+    background-color: #0056b3;
+}
+
+/* Темная тема */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-theme header.sticky-top {
+    background-color: rgba(26, 26, 26, 0.8);
+}
+
+body.dark-theme .nav-links a,
+body.dark-theme .theme-toggle {
+    color: #fff;
+}
+
+body.dark-theme .project {
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    /* Показывать бургер меню на маленьких экранах */
+    .burger-menu {
+        display: block;
+    }
+
+    /* Скрыть навигационные ссылки по умолчанию на маленьких экранах */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* Добавить стили для показа меню при активном классе */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Изменить порядок элементов, чтобы theme-toggle был после order-btn */
+    .nav-links > *:not(.theme-toggle) {
+        margin-bottom: 1rem;
+    }
+
+    /* Стили для адаптивного бургер меню */
+    .mobile-menu {
+        display: flex; /* Показывать на мобильных экранах */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-menu.active {
+        display: flex;
+    }
+
+    .mobile-menu-content {
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .mobile-menu-content a {
+        display: block;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .mobile-menu-content a:hover {
+        background-color: #f2f2f2;
+    }
+
+    .close-mobile-menu {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    /* Новые стили для скрытия mobile-menu по умолчанию на широких экранах */
+    .mobile-menu {
+        display: none;
+    }
+
+    /* Добавление theme-toggle в mobile-menu */
+    .mobile-menu .theme-toggle {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #333;
+        margin-top: 1rem; /* Отступ сверху */
+    }
+
+    body.dark-theme .mobile-menu .theme-toggle {
+        color: #fff;
+    }
+
+    footer {
+        text-align: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-section.newsletter form {
+        flex-direction: column; /* Вернуть flex-direction в column для адаптивности */
+    }
+
+    .footer-section.newsletter form input {
+        margin-bottom: 1rem; /* Добавить отступ между полем и кнопкой */
+        width: 100%;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/* Скрываем mobile-menu на широких экранах */
+.mobile-menu {
+    display: none;
+}
