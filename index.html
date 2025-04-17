@@ -79,7 +79,7 @@
     <section class="contact-form" id="order">
         <div class="form-wrapper">
             <h2>Оставьте заявку</h2>
-            <form action="check_the_telegram.php" method="POST">
+            <form id="telegramForm">
                 <input type="text" name="name" placeholder="Имя" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="tel" name="phone" placeholder="Телефон" required>
@@ -92,6 +92,31 @@
                 </div>
                 <button type="submit">Отправить</button>
             </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const form = document.getElementById('telegramForm');
+
+                    form.addEventListener('submit', function(event) {
+                        event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+                        const formData = new FormData(form);
+
+                        fetch('check_the_telegram.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                console.log(data); // Вывод ответа от сервера (можно использовать для отображения сообщения об успехе/ошибке)
+                                // Дополнительные действия после успешной отправки (например, очистка формы)
+                                form.reset();
+                            })
+                            .catch(error => {
+                                console.error('Ошибка:', error);
+                            });
+                    });
+                });
+            </script>
         </div>
     </section>
 </main>
