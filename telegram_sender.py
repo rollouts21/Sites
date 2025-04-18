@@ -3,7 +3,7 @@ import socketserver
 import json
 import requests
 import logging
-from config import bot_token, chat_id
+
 
 logging.basicConfig(
     filename="/var/log/telegram_sender.log",
@@ -35,8 +35,8 @@ class TelegramHandler(http.server.BaseHTTPRequestHandler):
             phone = data.get("phone")
             comment = data.get("comment")
 
-            bot_token = bot_token  # Замените на токен вашего бота
-            chat_id = chat_id  # Замените на ID чата
+            bot_token = "7639197628:AAG3_sbUb2hs6xSoHmruMv_kteFvw2fBASk"  # Замените на токен вашего бота
+            chat_id = "820559840"  # Замените на ID чата
 
             message = f"Новая заявка:\nИмя: {name}\nEmail: {email}\nТелефон: {phone}\nКомментарий: {comment}"
             url = f"https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}"
