@@ -4,13 +4,21 @@ import json
 import requests
 from urllib.parse import urlparse, parse_qs
 
-PORT = 8000
+PORT = 8000  # Порт для HTTP-сервера
 
 
 class TelegramHandler(http.server.BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def do_POST(self):
-        content_lenght = int(self.headers["Content-Lenght"])
-        post_data = self.rfile.read(content_lenght)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        content_length = int(self.headers["Content-Length"])
+        post_data = self.rfile.read(content_length)
         data = json.loads(post_data.decode("utf-8"))
 
         name = data.get("name")
@@ -18,12 +26,10 @@ class TelegramHandler(http.server.BaseHTTPRequestHandler):
         phone = data.get("phone")
         comment = data.get("comment")
 
-        bot_token = "7639197628:AAG3_sbUb2hs6xSoHmruMv_kteFvw2fBASk"
-        chat_id = "820559840"
+        bot_token = "7639197628:AAG3_sbUb2hs6xSoHmruMv_kteFvw2fBASk"  # Замените на токен вашего бота
+        chat_id = "820559840"  # Замените на ID чата
 
-        message = (
-            f"Новая заявка: {name}\nEmail {email}\nPhone {phone}\nComment {comment}"
-        )
+        message = f"Новая заявка:\nИмя: {name}\nEmail: {email}\nТелефон: {phone}\nКомментарий: {comment}"
         url = f"https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}"
 
         try:
@@ -56,6 +62,7 @@ class TelegramHandler(http.server.BaseHTTPRequestHandler):
             )
 
     def do_GET(self):
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
