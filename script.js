@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const privacyLink = document.querySelector(".privacy-link");
   if (privacyLink) {
     const privacyPopup = document.getElementById("privacy");
-    const closePopupButton = document.querySelector(".close-popup");
+    const closePopupButton = document.querySelector(".close-button");
     const understoodButton = document.querySelector(".understood");
 
     privacyLink.addEventListener("click", function (e) {
@@ -148,38 +148,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const formElements = form.querySelectorAll("input, textarea, .privacy");
 
     // Обработчик отправки формы
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault(); // Предотвращаем стандартную отправку формы
 
       const formData = new FormData(form);
       const jsonData = JSON.stringify(Object.fromEntries(formData));
-
-      fetch("https://api.akxmai.ru", {
-        //  http://127.0.0.1:5000
-        method: "POST",
-        main: 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: jsonData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data); // Вывод ответа от сервера
-
-          // Скрываем элементы формы
-          formElements.forEach((element) => {
-            element.style.display = "none";
+      // Функция для отправки запроса
+      const sendRequest = async () => {
+        try {
+          const response = await fetch("https://api.akxmai.ru", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "https://akxmai.ru",
+            },
+            body: jsonData,
           });
 
-          // Изменяем текст кнопки
-          submitButton.textContent =
-            "Спасибо, мы свяжемся с вами в ближайшее время";
-        })
-        .catch((error) => {
-          console.error("Ошибка:", error);
-          // Обработка ошибки (например, отображение сообщения об ошибке)
-        });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Success:", data);
+          // Проверяем, что ответ содержит ожидаемые данные
+          if (data && data.status === "success") {
+            formElements.forEach((element) => {
+              element.style.display = "none";
+            });
+            submitButton.textContent =
+              "Спасибо, мы свяжемся с вами в ближайшее время";
+          } else {
+            console.error("Ошибка: Неверный ответ от сервера:", data);
+            // Обработка ошибки (например, отображение сообщения об ошибке)
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      sendRequest();
     });
   }
 });
