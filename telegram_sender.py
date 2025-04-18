@@ -18,8 +18,8 @@ class TelegramHandler(http.server.BaseHTTPRequestHandler):
         phone = data.get("phone")
         comment = data.get("comment")
 
-        bot_token = ""
-        chat_id = ""
+        bot_token = "7639197628:AAG3_sbUb2hs6xSoHmruMv_kteFvw2fBASk"
+        chat_id = "820559840"
 
         message = (
             f"Новая заявка: {name}\nEmail {email}\nPhone {phone}\nComment {comment}"
