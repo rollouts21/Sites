@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const privacyLink = document.querySelector(".privacy-link");
   if (privacyLink) {
     const privacyPopup = document.getElementById("privacy");
-    const closePopupButton = document.querySelector(".close-popup");
+    const closePopupButton = document.querySelector(".close-button");
     const understoodButton = document.querySelector(".understood");
 
     privacyLink.addEventListener("click", function (e) {
@@ -154,29 +154,31 @@ document.addEventListener("DOMContentLoaded", function () {
       const formData = new FormData(form);
       const jsonData = JSON.stringify(Object.fromEntries(formData));
 
-      fetch("http://localhost:8000", {
-        //  http://127.0.0.1:5000
-        method: "POST",
+      fetch("http://akxmai.ru:8000", {
+        // Замените на URL вашего Python-сервера
+        method: "GET", // Или 'POST', если Python script ждёт POST
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: jsonData,
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data); // Вывод ответа от сервера
-
-          // Скрываем элементы формы
-          formElements.forEach((element) => {
-            element.style.display = "none";
-          });
-
-          // Изменяем текст кнопки
-          submitButton.textContent =
-            "Спасибо, мы свяжемся с вами в ближайшее время";
+          console.log("Success:", data);
+          // Проверяем, что ответ содержит ожидаемые данные
+          if (data && data.status === "success") {
+            formElements.forEach((element) => {
+              element.style.display = "none";
+            });
+            submitButton.textContent =
+              "Спасибо, мы свяжемся с вами в ближайшее время";
+          } else {
+            console.error("Ошибка: Неверный ответ от сервера:", data);
+            // Обработка ошибки (например, отображение сообщения об ошибке)
+          }
         })
         .catch((error) => {
-          console.error("Ошибка:", error);
+          console.error("Error:", error);
           // Обработка ошибки (например, отображение сообщения об ошибке)
         });
     });
